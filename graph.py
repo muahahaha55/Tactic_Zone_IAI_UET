@@ -97,7 +97,7 @@ class Workflow():
 
 def visualize_workflow():
     # Initialize workflow with SurveyNode directly
-    llm = ChatGrog(model="llama3-70b-8192", temperature=0)
+    llm = ChatGrog(model="llama-3.3-70b-versatile", temperature=0)
     workflow = Workflow(llm)
     
     # Get the graph before compilation
