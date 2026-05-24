@@ -1,10 +1,6 @@
 .specstory/
-
-# Git
 .git
 .gitignore
-
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -25,37 +21,21 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-
-# Virtual Environment
+.venv/
 venv/
 ENV/
-
-# Editor directories and files
 .idea
 .vscode
 *.swp
 *.swo
-
-# Database files
 *.db
 *.sqlite
-
-# Chromedriver
 chromedriver
-
-# Docker-specific
 .dockerignore
 Dockerfile
-
-# Chroma database (will be recreated)
-# chroma_db/
-
-# Logs
+chroma_db/
+Teams/
 *.log
-
-# Testing
 .pytest_cache/
 .coverage
-
-# Misc
-.DS_Store 
+.DS_Store

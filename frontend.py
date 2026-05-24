@@ -51,16 +51,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
 async def process_query(workflow: Workflow, initial_state: dict, result_container: dict):
     await Workflow.fetch_response(workflow, initial_state, result_container)
-
 
 def run_async_task_in_thread(workflow, initial_state, result_container):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(process_query(workflow, initial_state, result_container))
-
 
 col1, col2, col3 = st.columns([1, 2, 1])
 
@@ -80,6 +77,8 @@ if "workflow" not in st.session_state:
     st.session_state.LLM = llm
 
 if "is_initialized" not in st.session_state:
+    system_init(st.session_state.LLM)
+    setup_scheduled_updates(**st.session_state)
     st.session_state.is_initialized = True
 
 if st.button("Close!"):

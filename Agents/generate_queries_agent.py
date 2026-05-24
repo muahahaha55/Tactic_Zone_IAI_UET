@@ -1,10 +1,10 @@
 from GraphState.deep_research_state import SectionState, Queries
-from langchain_openai import ChatOpenAI
+from langchain_chatgroq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
 from Prompt import REPORT_SECTION_QUERY_GENERATOR_PROMPT
 from Data import NUMBER_OF_QUERIES
 
-def generate_queries(llm: ChatOpenAI, state: SectionState):
+def generate_queries(llm: ChatGroq, state: SectionState):
     """ Generate search queries for a specific report section """
 
     # Get state

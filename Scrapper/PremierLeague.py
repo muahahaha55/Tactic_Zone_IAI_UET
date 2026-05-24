@@ -7,7 +7,7 @@ import time
 from .scrapperData import Data
 import os
 from io import StringIO
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from typing import List, Dict
 from .helpers import format_df_as_str_dict, create_team_data_report
 
@@ -196,7 +196,7 @@ class PremierLeagueCrawler:
       return prompt
 
    @staticmethod
-   def transform_xlsx_to_md(data_to_transform: List[str], llm: ChatOpenAI) -> str:
+   def transform_xlsx_to_md(data_to_transform: List[str], llm: ChatGroq) -> str:
       """
       Transform team data to md.
       """

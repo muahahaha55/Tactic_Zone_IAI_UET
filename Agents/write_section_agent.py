@@ -1,10 +1,10 @@
 from GraphState.deep_research_state import SectionState, ReportState
-from langchain_openai import ChatOpenAI
+from langchain_chatgroq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
 from Prompt.deep_research_prompts import SECTION_WRITER_PROMPT, FINAL_SECTION_WRITER_PROMPT
 from langgraph.constants import Send
 
-def write_section(llm: ChatOpenAI, state: SectionState):
+def write_section(llm: ChatGroq, state: SectionState):
     """ Write a section of the report """
 
     # Get state
@@ -24,7 +24,7 @@ def write_section(llm: ChatOpenAI, state: SectionState):
     # Write the updated section to completed sections
     return {"completed_sections": [section]}
 
-def write_final_sections(llm: ChatOpenAI, state: SectionState):
+def write_final_sections(llm: ChatGroq, state: SectionState):
     """ Write the final sections of the report, which do not require web search and use the completed sections as context"""
 
     # Get state

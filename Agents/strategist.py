@@ -6,7 +6,7 @@ from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_community.vectorstores import Chroma
 from RAG import Data as RAG_data
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_openai import ChatOpenAI
+from langchain_chatgroq import ChatGroq
 
 class Strategist():
     def __init__(self, llm):

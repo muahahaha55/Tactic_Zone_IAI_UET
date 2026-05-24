@@ -7,13 +7,13 @@ from Scrapper.PremierLeague import PremierLeagueCrawler
 from Scrapper.scrapperData import Data as scrapperData
 import RAG.Data as RAG_Data
 from RAG.RAG_app import RAG_application
-from langchain_grog import ChatGrog
+from langchain_groq import ChatGroq
 
 # Update interval set to 24 hours (24 hr * 60 min * 60 sec)
 UPDATE_INTERVAL = 24 * 60 * 60
 
 
-def system_init(llm: ChatOpenAI):
+def system_init(llm: ChatGroq):
     """
     Initialize the project variables and manage the RAG Vector Database.
     """
@@ -24,7 +24,7 @@ def system_init(llm: ChatOpenAI):
         add_doc_to_RAG_vector_db()
 
 
-def update_PremierLeague_data(llm: ChatOpenAI):
+def update_PremierLeague_data(llm: ChatGroq):
     """
     Scrape the latest data from fbref.com, save to Excel, and transform to Markdown.
     """
@@ -58,7 +58,7 @@ def update_PremierLeague_data(llm: ChatOpenAI):
         print(f"Error during data update process: {e}")
 
 
-def transform_team_data_to_md(filePath: str, team_name: str, llm: ChatOpenAI):
+def transform_team_data_to_md(filePath: str, team_name: str, llm: ChatGroq):
     """
     Transform the structured Excel team data into Markdown format via LLM.
     """
@@ -122,7 +122,7 @@ def setup_scheduled_updates(**session_state: SessionStateProxy):
         session_state["last_update_time"] = datetime.datetime.now()
 
 
-def _private_scheduled_update_worker(stop_event: threading.Event, llm: ChatOpenAI):
+def _private_scheduled_update_worker(stop_event: threading.Event, llm: ChatGroq):
     """
     Worker loop for handling scheduled tasks based on the defined interval.
     """
