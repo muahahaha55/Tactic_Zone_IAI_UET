@@ -1,6 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_chatgroq import ChatGroq
+from langchain_groq import ChatGroq
 from GraphState.strategist_state import StrategistState
 from Prompt import rewrite_query_template
 

@@ -1,173 +1,53 @@
-# ⚽ Football Betting Agent
+# ⚽ Tactic Zone IAI-UET 🤖
 
-![Cover](Doc/Cover.png)
+---
 
-## 📝 Description
+## 📝 Giới thiệu & Mục tiêu 🎯
 
-This project aims to increase the winning rate in football betting games in the Premier League. We utilize AI agents to analyze team statistics and provide solid suggestions for betting decisions.
+**Tactic Zone** là một hệ thống đa tác nhân thông minh (**Multi-Agent AI System**) được nghiên cứu và phát triển nhằm tối ưu hóa các quyết định phân tích dữ liệu, từ đó nâng cao tỷ lệ chiến thắng khi dự đoán kết quả bóng đá giải Ngoại hạng Anh (**Premier League**). Thay vì dựa vào những nhận định cảm tính cá nhân, hệ thống giải quyết bài toán cốt lõi bằng cách ứng dụng AI để mổ xẻ các số liệu chiến thuật chuyên sâu một cách khách quan và thực tế.
 
-## ✨ Features
+Quy trình vận hành lõi của hệ thống được vận hành khép kín qua 3 giai đoạn chính:
+1. **📥 Thu thập & Chuẩn hóa dữ liệu:** Hệ thống tự động cào dữ liệu thống kê chi tiết của các câu lạc bộ từ nguồn uy tín, sau đó chuyển đổi các bảng tính phức tạp thành văn bản định dạng Markdown cấu trúc cao nhờ sức mạnh xử lý ngôn ngữ của LLM Groq.
+2. **💾 Lưu trữ tri thức (RAG):** Cơ sở dữ liệu vectơ ChromaDB chịu trách nhiệm băm nhỏ, nhúng (Embedding) và lưu trữ các phân tích chiến thuật này, đảm bảo dữ liệu luôn sẵn sàng được truy xuất chính xác theo ngữ cảnh câu hỏi.
+3. **🤝 Phối hợp đa tác nhân (Multi-Agent Workflow):** Khi nhận truy vấn, mạng lưới Agent chuyên biệt bao gồm *Query Analyzer* (Phân tích ý định), *Search Agent* (Tìm kiếm nâng cao), *Strategist* (Lên chiến thuật) và *Report Agent* (Tổng hợp báo cáo) sẽ cùng phối hợp chặt chẽ để đưa ra câu trả lời sắc bén nhất qua giao diện Streamlit trực quan.
 
-- **🤖 AI-Powered Analysis**: Leverages advanced AI agents to provide intelligent betting recommendations
-- **💬 Interactive Chat Interface**: User-friendly frontend with natural language interaction
-- **🔍 Deep Research Capability**: Powered by a research system which can make a comprehensive investigation in specific topic
-- **📊 Premier League Data Scraping**: Automatically collects and processes real-time statistics
-- **📈 Comprehensive Match Analysis**: Evaluates team performance, historical data, and current form
-- **🎯 Personalized Betting Advice**: Tailored recommendations based on user preferences and risk tolerance
-- **🔄 Real-time Updates**: Continuous data refresh to ensure the most current information
+---
 
-## 🏗️ Architecture
+## 🐳 Hướng dẫn triển khai bằng Docker 🚀
 
-The system consists of several key components:
+Để khởi chạy toàn bộ hệ thống một cách nhanh chóng, đồng bộ và tránh lỗi môi trường trên máy tính, bạn hãy thực hiện theo các bước chi tiết sau:
 
-1. **Data Collection Layer**: Scrapes and processes Premier League data
-2. **AI Analysis Engine**: Processes data and generates insights
-3. **User Interface**: Interactive chat-based interface
+### 🔑 Bước 1: Thiết lập cấu hình môi trường
+Tạo một file có tên chính xác là `.env` tại thư mục gốc của dự án (nằm cùng cấp với file `Dockerfile`) và khai báo các mã khóa API của bạn:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+LANGCHAIN_API_KEY=your_langchain_api_key_here
+TAVILY_API_KEY=your_tavily_api_key_here
+HUGGINGFACE_API_KEY=your_huggingface_api_key_here
+```
+⚠️ Lưu ý quan trọng: Hệ thống đã được nâng cấp toàn diện sang sử dụng bộ não CDhatGroq. Hãy đảm bảo bạn đã điền chính xác mã GROQ_API_KEY để các Agent không bị mất kết nối.
 
-![Architecture of System](Doc/Europe%20Football%20workflow-v2.drawio.png)
+### 🛠️ Bước 2: Xây dựng Docker Image
 
-![Architecture of Agent workflow](Doc/workflow_graph.png)
+Mở Terminal ngay tại đường dẫn thư mục dự án của bạn và chạy lệnh sau để tiến hành đóng gói toàn bộ ứng dụng:
 
-## 🚀 Getting Started
+```
+Bash
+docker build -t tactic-zone-agent .
+```
 
-### 🐳 Run with Docker
+### 🏃‍♂️ Bước 3: Khởi chạy Docker Container
 
-1. Make sure you have Docker and Docker Compose installed on your system:
-   - [Install Docker](https://docs.docker.com/get-docker/)
-   - [Install Docker Compose](https://docs.docker.com/compose/install/)
+Sau khi quá trình build hoàn tất thành công, bạn chạy lệnh dưới đây để kích hoạt container chạy ngầm và liên kết file môi trường .env đã cấu hình ở Bước 1:
 
-2. Clone the repository:
+```
+Bash
+docker run --name my-tactic-agent -d -p 8501:8501 --env-file .env tactic-zone-agent
+```
 
-   ```bash
-   git clone https://github.com/Haemon-Yang/football-betting-agent.git
-   cd football-betting-agent
-   ```
-
-3. Create a `.env` file with the required API keys:
-
-   ```bash
-   # On macOS/Linux
-   cp .env_example .env
-   
-   # On Windows
-   copy .env_example .env
-   # OR using PowerShell
-   Copy-Item .env_example .env
-   ```
-
-4. Edit .env and add your API keys
-   
-   ```bash
-   # Edit the .env file and add your API keys:
-   OPENAI_API_KEY=your_openai_api_key
-   LANGCHAIN_API_KEY=your_langchain_api_key
-   TAVILY_API_KEY=your_tavily_api_key
-   HUGGINGFACE_API_KEY=your_huggingface_api_key
-   ```
-
-5. Build the Docker image:
-
-   ```bash
-   docker build --no-cache -t soccer-betting-agent .
-   ```
-
-6. Run the Docker image by container
-
-   ```bash
-   docker run --name your_container_name -d -p HOST_IP:HOST_PORT:8501 soccer-betting-agent
-   ```
-
-   ```bash
-   #Example
-   docker run --name container_called_aaa -d -p 0.0.0.0:1000:8501 soccer-betting-agent
-   ```
-
-   You can set up your HOST_PORT based on your personal preference.
-   
-   Note: You need to specify the host ip.
-
-7. Access the application in your browser:
-
-   ```
-   http://localhost:HOST_PORT
-   ```
-
-### 💻 Run Locally
-
-To run the Soccer Betting Agent locally on your machine, follow these steps:
-
-1. **Prerequisites**:
-   - Python 3.9+ installed
-   - Git installed
-   - OpenAI API key and other required API keys
-
-2. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/Haemon-Yang/football-betting-agent.git
-   cd football-betting-agent
-   ```
-
-3. **Set up a virtual environment** (optional but recommended):
-
-   ```bash
-   # On Windows
-   python -m venv venv
-   venv\Scripts\activate
-
-   # On macOS/Linux
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-
-4. **Install dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Configure environment variables**:
-
-   ```bash
-   # On macOS/Linux
-   cp .env_example .env
-   
-   # On Windows
-   copy .env_example .env
-   # OR using PowerShell
-   Copy-Item .env_example .env
-   
-   # Edit the .env file and add your API keys:
-   OPENAI_API_KEY=your_openai_api_key
-   LANGCHAIN_API_KEY=your_langchain_api_key
-   TAVILY_API_KEY=your_tavily_api_key
-   HUGGINGFACE_API_KEY=your_huggingface_api_key
-   ```
-
-6. **Run the application**:
-
-   ```bash
-   streamlit run frontend.py
-   ```
-
-7. **Access the application**:
-
-   Open your browser and navigate to:
-
-   ```
-   http://localhost:8501
-   ```
-
-The application will load the necessary models and start scraping data on first run. You can then interact with the betting agent through the chat interface.
-
-## 🤝 Contributing
-
-Feel free to submit pull request or open an issue for any suggestion or improvements.
-
-## 📄 License
-
-This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-For support, please open an issue in the GitHub repository or contact the maintainers.
+### 🌐 Bước 4: Truy cập giao diện ứng dụng
+Bây giờ, ứng dụng phân tích chiến thuật đã sẵn sàng! Bạn hãy mở trình duyệt web lên và truy cập vào đường dẫn sau để trải nghiệm:
+```
+Plaintext
+http://localhost:8501
+```

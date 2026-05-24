@@ -1,5 +1,5 @@
 from GraphState.deep_research_state import SectionState, Queries
-from langchain_chatgroq import ChatGroq
+from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
 from Prompt import REPORT_SECTION_QUERY_GENERATOR_PROMPT
 from Data import NUMBER_OF_QUERIES

@@ -4,7 +4,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.vectorstores import Chroma
 from RAG import Data as RAG_data
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chatgroq import ChatGroq
+from langchain_groq import ChatGroq
 from GraphState.strategist_state import StrategistState
 from langchain_core.output_parsers import PydanticOutputParser
 from Prompt import retrieve_template, interpret_query_prompt
