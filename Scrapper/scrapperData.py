@@ -1,7 +1,7 @@
 from fake_useragent import UserAgent
 
 class Data:
-    ScrappedUrl = "https://fbref.com/en/comps/9/Premier-League-Stats"
+    ScrappedUrl = "https://fbref.com/en/comps/9/2022-2023/2022-2023-Premier-League-Stats"
     targetTable = "table.stats_table"
     team_data_savePath = r"Teams/"
 

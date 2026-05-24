@@ -1,2 +1,2 @@
-from .PrimerLeague import PremierLeagueCrawler
+from .PremierLeague import PremierLeagueCrawler
 from .scrapperData import Data
