@@ -25,7 +25,6 @@ LANGCHAIN_API_KEY=your_langchain_api_key_here
 TAVILY_API_KEY=your_tavily_api_key_here
 HUGGINGFACE_API_KEY=your_huggingface_api_key_here
 ```
-⚠️ Lưu ý quan trọng: Hệ thống đã được nâng cấp toàn diện sang sử dụng bộ não CDhatGroq. Hãy đảm bảo bạn đã điền chính xác mã GROQ_API_KEY để các Agent không bị mất kết nối.
 
 ### 🛠️ Bước 2: Xây dựng Docker Image
 
